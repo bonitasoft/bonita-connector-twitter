@@ -4,8 +4,8 @@
 	<definitionId>twitter-update-status</definitionId>
 	<definitionVersion>1.0.0</definitionVersion>
 	<description>Implementation based on twitter4j-core 3.0.3</description>
-	<implementationClassname>org.bonitasoft.connectors.TwitterUpdateStatusConnector</implementationClassname>
-	<implementationId>twitter-update-status-impl</implementationId>
+	<implementationClassname>org.bonitasoft.connectors.twitter.TwitterUpdateStatusConnector</implementationClassname>
+	<implementationId>twitter-update-status</implementationId>
 	<implementationVersion>1.0.0</implementationVersion>
 
     $Dependencies$

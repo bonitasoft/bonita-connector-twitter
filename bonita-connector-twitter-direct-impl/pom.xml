@@ -15,7 +15,6 @@
         <implementation.id>twitter-direct</implementation.id>
     </properties>
 
-
     <dependencies>
 		<dependency>
 			<artifactId>bonita-connector-twitter-direct-def</artifactId>
