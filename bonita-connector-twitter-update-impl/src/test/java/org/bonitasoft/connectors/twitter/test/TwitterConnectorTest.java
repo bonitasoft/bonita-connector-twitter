@@ -24,8 +24,8 @@ import java.util.logging.Logger;
 
 import org.bonitasoft.connectors.twitter.TwitterConnector;
 import org.bonitasoft.engine.connector.Connector;
+import org.bonitasoft.engine.connector.ConnectorValidationException;
 import org.bonitasoft.engine.exception.BonitaException;
-import org.bonitasoft.engine.exception.ConnectorValidationException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
