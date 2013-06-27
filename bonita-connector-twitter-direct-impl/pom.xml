@@ -6,22 +6,26 @@
 	<parent>
 		<artifactId>bonita-connector-twitter</artifactId>
 		<groupId>org.bonitasoft.connectors</groupId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>6.1.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>bonita-connector-twitter-direct-impl</artifactId>
-	<version>6.1.0-SNAPSHOT</version>
 
-	<dependencies>
+    <properties>
+        <implementation.id>twitter-direct</implementation.id>
+    </properties>
+
+
+    <dependencies>
 		<dependency>
 			<artifactId>bonita-connector-twitter-direct-def</artifactId>
 			<groupId>org.bonitasoft.connectors</groupId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
+            <version>${project.version}</version>
+        </dependency>
 		<dependency>
 			<artifactId>bonita-connector-twitter-common</artifactId>
 			<groupId>org.bonitasoft.connectors</groupId>
-			<version>1.0.0-SNAPSHOT</version>
+            <version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -39,7 +43,7 @@
 					<dependency>
 						<groupId>org.bonitasoft.connectors</groupId>
 						<artifactId>bonita-connectors-assembly</artifactId>
-						<version>6.1.0-SNAPSHOT</version>
+						<version>6.0.0</version>
 					</dependency>
 				</dependencies>
 				<executions>
