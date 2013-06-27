@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<implementation:connectorImplementation xmlns:implementation="http://www.bonitasoft.org/ns/connector/implementation/6.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<definitionId>twitter-direct-message</definitionId>
+	<definitionVersion>1.0.0</definitionVersion>
+	<description>Implementation based on twitter4j-core 3.0.3</description>
+	<implementationClassname>org.bonitasoft.connectors.TwitterDirectMessageConnector</implementationClassname>
+	<implementationId>twitter-direct-impl</implementationId>
+	<implementationVersion>1.0.0</implementationVersion>
+
+	<jarDependencies>
+		<jarDependency>bonita-connector-twitter-common-1.0.0-SNAPSHOT.jar</jarDependency>
+		<jarDependency>bonita-connector-twitter-direct-impl-1.0.0-SNAPSHOT.jar</jarDependency>
+		<jarDependency>twitter4j-core-3.0.3.jar</jarDependency>
+	</jarDependencies>
+
+</implementation:connectorImplementation>

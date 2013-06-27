@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition:ConnectorDefinition xmlns:definition="http://www.bonitasoft.org/ns/connector/definition/6.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<id>twitter-direct-message</id>
+	<version>1.0.0</version>
+	<icon>twitter.png</icon>
+
+	<category id="social" icon="social.png" />
+
+	<input name="proxyHost" type="java.lang.String" />
+	<input name="proxyPort" type="java.lang.Long" defaultValue="0" />
+	<input name="proxyUser" type="java.lang.String" mandatory="true" defaultValue="proxyUser" />
+	<input name="proxyPass" type="java.lang.String" mandatory="true" defaultValue="proxyPass" />
+	<input name="consumerKey" type="java.lang.String" mandatory="true" />
+	<input name="consumerSecret" type="java.lang.String" mandatory="true" />
+	<input name="accessToken" type="java.lang.String" mandatory="true" />
+	<input name="accessTokenSecret" type="java.lang.String" mandatory="true" />
+	<input name="message" type="java.lang.String" mandatory="true" />
+	<input name="recipientId" type="java.lang.String" mandatory="true" />
+
+	<page id="connection">
+		<widget id="ConsumerKey" inputName="consumerKey" xsi:type="definition:Password" />
+		<widget id="ConsumerSecret" inputName="consumerSecret" xsi:type="definition:Password" />
+		<widget id="AccessToken" inputName="accessToken" xsi:type="definition:Password" />
+		<widget id="AccessTokenSecret" inputName="accessTokenSecret" xsi:type="definition:Password" />
+		<widget id="ProxySettings" xsi:type="definition:Group">
+			<widget id="ProxyHost" inputName="proxyHost" xsi:type="definition:Text" />
+			<widget id="ProxyPort" inputName="proxyPort" xsi:type="definition:Text" />
+			<widget id="ProxyUser" inputName="proxyUser" xsi:type="definition:Text" />
+			<widget id="ProxyPass" inputName="proxyPass" xsi:type="definition:Password" />
+		</widget>
+	</page>
+	
+	<page id="msg">
+		<widget id="Message" inputName="message" xsi:type="definition:Text" />
+		<widget id="RecipientID" inputName="recipientId" xsi:type="definition:Text" />
+	</page>
+
+</definition:ConnectorDefinition>
