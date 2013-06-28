@@ -5,6 +5,7 @@
 	<icon>twitter.png</icon>
 
 	<category id="social" icon="social.png" />
+	<category id="twitter" icon="twitter.png" parentCategoryId="social" />
 
 	<input name="proxyHost" type="java.lang.String" />
 	<input name="proxyPort" type="java.lang.Long" defaultValue="0" />
