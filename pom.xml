@@ -34,8 +34,8 @@
     </build>
 
     <scm>
-        <developerConnection>scm:git:git://github.com/bonitasoft/bonita-connector-twitter.git</developerConnection>
-        <connection>scm:git:ssh://git@github.com/bonitasoft/bonita-connector-twitter.git</connection>
+        <developerConnection>https://github.com/bonitasoft/bonita-connector-twitter.git</developerConnection>
+        <connection>https://github.com/bonitasoft/bonita-connector-twitter.git</connection>
     </scm>
 
 
