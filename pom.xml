@@ -35,6 +35,8 @@
 
     <scm>
         <developerConnection>scm:git:git@github.com:bonitasoft/bonita-connector-twitter.git</developerConnection>
+        <url>scm:git:git@github.com:bonitasoft/bonita-connector-twitter.git</url>
+        <connection>scm:git:git@github.com:bonitasoft/bonita-connector-twitter.git</connection>
     </scm>
 
 
