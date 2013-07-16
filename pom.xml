@@ -10,7 +10,7 @@
 
 	<artifactId>bonita-connector-twitter</artifactId>
 	<packaging>pom</packaging>
-	<version>6.1.0-SNAPSHOT</version>
+	<version>6.1.0-rc-12</version>
 
 	<modules>
 		<module>bonita-connector-twitter-common</module>
@@ -36,7 +36,7 @@
     <scm>
         <developerConnection>scm:git:git@github.com:bonitasoft/bonita-connector-twitter.git</developerConnection>
         <connection>scm:git:git@github.com:bonitasoft/bonita-connector-twitter.git</connection>
-      <tag>HEAD</tag>
+      <tag>bonita-connector-twitter-6.1.0-rc-12</tag>
   </scm>
 
 
