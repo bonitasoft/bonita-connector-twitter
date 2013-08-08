@@ -4,7 +4,7 @@
 	<definitionId>twitter-direct</definitionId>
 	<definitionVersion>1.0.0</definitionVersion>
 	<description>Implementation based on twitter4j-core 3.0.3</description>
-	<implementationClassname>org.bonitasoft.connectors.TwitterDirectMessageConnector</implementationClassname>
+	<implementationClassname>org.bonitasoft.connectors.twitter.TwitterDirectMessageConnector</implementationClassname>
 	<implementationId>twitter-direct</implementationId>
 	<implementationVersion>1.0.0</implementationVersion>
 
