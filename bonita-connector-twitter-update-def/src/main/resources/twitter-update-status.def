@@ -8,7 +8,7 @@
 	<category id="twitter" icon="twitter.png" parentCategoryId="social" />
 
 	<input name="proxyHost" type="java.lang.String" />
-	<input name="proxyPort" type="java.lang.Long" defaultValue="0" />
+	<input name="proxyPort" type="java.lang.Integer" defaultValue="0" />
 	<input name="proxyUser" type="java.lang.String" mandatory="true" defaultValue="proxyUser" />
 	<input name="proxyPass" type="java.lang.String" mandatory="true" defaultValue="proxyPass" />
 	<input name="consumerKey" type="java.lang.String" mandatory="true" />
