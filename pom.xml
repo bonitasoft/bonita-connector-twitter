@@ -1,11 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<artifactId>bonita-connectors</artifactId>
 		<groupId>org.bonitasoft.connectors</groupId>
-        <version>6.1.0-SNAPSHOT</version>
+		<version>1.0.0</version>
 	</parent>
 
 	<artifactId>bonita-connector-twitter</artifactId>
@@ -19,26 +20,36 @@
 		<module>bonita-connector-twitter-update-impl</module>
 	</modules>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.4</version>
-                <configuration>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+	<properties>
+		<bonita.engine.version>6.2.0</bonita.engine.version>
+		<twitter.common.version>1.0.0</twitter.common.version>
+	</properties>
 
-    <scm>
-        <developerConnection>scm:git:git@github.com:bonitasoft/bonita-connector-twitter.git</developerConnection>
-        <connection>scm:git:git@github.com:bonitasoft/bonita-connector-twitter.git</connection>
-        <url>https://github.com/bonitasoft/bonita-connector-twitter</url>
-      <tag>HEAD</tag>
-  </scm>
+	<dependencies>
+		<dependency>
+			<!-- Latest Version of Bonita released, against which the initial development 
+				has been done. -->
+			<!-- The connector will be tested against more recent version -->
+			<artifactId>bonita-common</artifactId>
+			<groupId>org.bonitasoft.engine</groupId>
+			<version>${bonita.engine.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 
+	<scm>
+		<developerConnection>scm:git:git@github.com:bonitasoft/bonita-connector-twitter.git</developerConnection>
+		<connection>scm:git:git@github.com:bonitasoft/bonita-connector-twitter.git</connection>
+		<url>https://github.com/bonitasoft/bonita-connector-twitter</url>
+	</scm>
 
 </project>

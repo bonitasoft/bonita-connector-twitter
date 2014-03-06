@@ -15,6 +15,7 @@
 package org.bonitasoft.connectors.twitter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -118,10 +119,9 @@ public abstract class TwitterConnector implements Connector {
 			final Twitter twitter = tf.getInstance();
 			executeTask(twitter);
 		} catch (final Exception e) {
-			System.out.println(e.getMessage());
-			throw new ConnectorException(e.getMessage());
+			throw new ConnectorException(e);
 		}
-		return null;
+		return Collections.emptyMap();
 	}
 
 	protected abstract void executeTask(Twitter twitter) throws Exception;

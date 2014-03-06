@@ -8,9 +8,9 @@
 	<category id="twitter" icon="twitter.png" parentCategoryId="social" />
 
 	<input name="proxyHost" type="java.lang.String" />
-	<input name="proxyPort" type="java.lang.Integer" defaultValue="0" />
-	<input name="proxyUser" type="java.lang.String" mandatory="true" defaultValue="proxyUser" />
-	<input name="proxyPass" type="java.lang.String" mandatory="true" defaultValue="proxyPass" />
+	<input name="proxyPort" type="java.lang.Integer" />
+	<input name="proxyUser" type="java.lang.String" />
+	<input name="proxyPass" type="java.lang.String" />
 	<input name="consumerKey" type="java.lang.String" mandatory="true" />
 	<input name="consumerSecret" type="java.lang.String" mandatory="true" />
 	<input name="accessToken" type="java.lang.String" mandatory="true" />
