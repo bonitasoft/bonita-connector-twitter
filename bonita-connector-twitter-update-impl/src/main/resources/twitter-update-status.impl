@@ -2,11 +2,11 @@
 <implementation:connectorImplementation xmlns:implementation="http://www.bonitasoft.org/ns/connector/implementation/6.0">
 
 	<definitionId>twitter-update-status</definitionId>
-	<definitionVersion>1.0.0</definitionVersion>
+	<definitionVersion>$definition.version$</definitionVersion>
 	<description>Implementation based on twitter4j-core 3.0.3</description>
 	<implementationClassname>org.bonitasoft.connectors.twitter.TwitterUpdateStatusConnector</implementationClassname>
 	<implementationId>twitter-update-status</implementationId>
-	<implementationVersion>1.0.0</implementationVersion>
+	<implementationVersion>$implementation.version$</implementationVersion>
 
     $Dependencies$
 

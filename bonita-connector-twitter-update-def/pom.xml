@@ -9,6 +9,7 @@
 	</parent>
 
 	<artifactId>bonita-connector-twitter-update-def</artifactId>
+	<version>1.0.0</version>
 
 
 </project>

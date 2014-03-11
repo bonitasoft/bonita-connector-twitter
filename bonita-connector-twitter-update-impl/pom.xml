@@ -9,21 +9,22 @@
 	</parent>
 
 	<artifactId>bonita-connector-twitter-update-impl</artifactId>
-
+	<version>1.0.0</version>
+	
     <properties>
-        <implementation.id>twitter-update-status</implementation.id>
+        <definition.version>1.0.0</definition.version>
     </properties>
 
     <dependencies>
 		<dependency>
 			<artifactId>bonita-connector-twitter-update-def</artifactId>
 			<groupId>org.bonitasoft.connectors</groupId>
-            <version>1.0.0</version>
+            <version>${definition.version}</version>
 		</dependency>
 		<dependency>
 			<artifactId>bonita-connector-twitter-common</artifactId>
 			<groupId>org.bonitasoft.connectors</groupId>
-			<version>${twitter.common.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
