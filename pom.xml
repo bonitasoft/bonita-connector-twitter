@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>bonita-connector-twitter</artifactId>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<packaging>pom</packaging>
 
 	<modules>
@@ -22,7 +22,8 @@
 	</modules>
 
 	<properties>
-		<bonita.engine.version>6.2.0</bonita.engine.version>
+		<bonita.engine.version>6.3.2</bonita.engine.version>
+		<twitter.common.version>1.1.0</twitter.common.version>
 	</properties>
 
 	<dependencies>

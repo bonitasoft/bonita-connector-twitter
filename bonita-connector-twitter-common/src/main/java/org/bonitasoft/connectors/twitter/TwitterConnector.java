@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2009-2011 BonitaSoft S.A.
+ * Copyright (C) 2009-2014 BonitaSoft S.A.
  * BonitaSoft, 31 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,98 +39,98 @@ import twitter4j.conf.ConfigurationBuilder;
 
 public abstract class TwitterConnector implements Connector {
 
-	private String proxyHost;
+    private String proxyHost;
 
-	private Integer proxyPort;
+    private Integer proxyPort;
 
-	private String proxyUser;
+    private String proxyUser;
 
-	private String proxyPass;
+    private String proxyPass;
 
-	private String consumerKey;
+    private String consumerKey;
 
-	private String consumerSecret;
+    private String consumerSecret;
 
-	private String accessToken;
+    private String accessToken;
 
-	private String accessTokenSecret;
+    private String accessTokenSecret;
 
-	@Override
-	public void setInputParameters(final Map<String, Object> parameters) {
-		final Object proxyHostObject = parameters.get("proxyHost");
-		proxyHost = proxyHostObject != null ? (String) proxyHostObject : "";
-		final Object proxyPortObject = parameters.get("proxyPort");
-		proxyPort = proxyPortObject != null ? (Integer) proxyPortObject : 0;
-		final Object proxyUserObject = parameters.get("proxyUser");
-		proxyUser = proxyUserObject != null ? (String) proxyUserObject : "";
-		final Object proxyPassObject = parameters.get("proxyPass");
-		proxyPass = proxyPassObject != null ? (String) proxyPassObject : "";
-		final Object consumerKeyObject = parameters.get("consumerKey");
-		consumerKey = consumerKeyObject != null ? (String) consumerKeyObject
-				: "";
-		final Object consumerSecretObject = parameters.get("consumerSecret");
-		consumerSecret = consumerSecretObject != null ? (String) consumerSecretObject
-				: "";
-		final Object accessTokenObject = parameters.get("accessToken");
-		accessToken = accessTokenObject != null ? (String) accessTokenObject
-				: "";
-		final Object accessTokenSecretObject = parameters
-				.get("accessTokenSecret");
-		accessTokenSecret = accessTokenSecretObject != null ? (String) accessTokenSecretObject
-				: "";
+    @Override
+    public void setInputParameters(final Map<String, Object> parameters) {
+        final Object proxyHostObject = parameters.get("proxyHost");
+        proxyHost = proxyHostObject != null ? (String) proxyHostObject : "";
+        final Object proxyPortObject = parameters.get("proxyPort");
+        proxyPort = proxyPortObject != null ? (Integer) proxyPortObject : 0;
+        final Object proxyUserObject = parameters.get("proxyUser");
+        proxyUser = proxyUserObject != null ? (String) proxyUserObject : "";
+        final Object proxyPassObject = parameters.get("proxyPass");
+        proxyPass = proxyPassObject != null ? (String) proxyPassObject : "";
+        final Object consumerKeyObject = parameters.get("consumerKey");
+        consumerKey = consumerKeyObject != null ? (String) consumerKeyObject
+                : "";
+        final Object consumerSecretObject = parameters.get("consumerSecret");
+        consumerSecret = consumerSecretObject != null ? (String) consumerSecretObject
+                : "";
+        final Object accessTokenObject = parameters.get("accessToken");
+        accessToken = accessTokenObject != null ? (String) accessTokenObject
+                : "";
+        final Object accessTokenSecretObject = parameters
+                .get("accessTokenSecret");
+        accessTokenSecret = accessTokenSecretObject != null ? (String) accessTokenSecretObject
+                : "";
 
-	}
+    }
 
-	@Override
-	public void validateInputParameters() throws ConnectorValidationException {
-		final List<String> errors = new ArrayList<String>(1);
+    @Override
+    public void validateInputParameters() throws ConnectorValidationException {
+        final List<String> errors = new ArrayList<String>(1);
 
-		if (proxyPort < 0) {
-			errors.add("proxyPort cannot be less than 0!");
-		} else if (proxyPort > 65535) {
-			errors.add("proxyPort cannot be greater than 65535!");
-		}
+        if (proxyPort < 0) {
+            errors.add("proxyPort cannot be less than 0!");
+        } else if (proxyPort > 65535) {
+            errors.add("proxyPort cannot be greater than 65535!");
+        }
 
-		if (!errors.isEmpty()) {
-			throw new ConnectorValidationException(this, errors);
-		}
-	}
+        if (!errors.isEmpty()) {
+            throw new ConnectorValidationException(this, errors);
+        }
+    }
 
-	@Override
-	public Map<String, Object> execute() throws ConnectorException {
+    @Override
+    public Map<String, Object> execute() throws ConnectorException {
 
-		final ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
-		if (proxyHost != null && proxyPort != null) {
-			configurationBuilder.setHttpProxyHost(proxyHost);
-			configurationBuilder.setHttpProxyPort(proxyPort);
-			if (proxyUser != null && proxyPass != null) {
-				configurationBuilder.setHttpProxyUser(proxyUser);
-				configurationBuilder.setHttpProxyPassword(proxyPass);
-			}
-		}
-		configurationBuilder.setOAuthConsumerKey(consumerKey);
-		configurationBuilder.setOAuthConsumerSecret(consumerSecret);
-		configurationBuilder.setOAuthAccessToken(accessToken);
-		configurationBuilder.setOAuthAccessTokenSecret(accessTokenSecret);
+        final ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+        if (proxyHost != null && proxyPort != null) {
+            configurationBuilder.setHttpProxyHost(proxyHost);
+            configurationBuilder.setHttpProxyPort(proxyPort);
+            if (proxyUser != null && proxyPass != null) {
+                configurationBuilder.setHttpProxyUser(proxyUser);
+                configurationBuilder.setHttpProxyPassword(proxyPass);
+            }
+        }
+        configurationBuilder.setOAuthConsumerKey(consumerKey);
+        configurationBuilder.setOAuthConsumerSecret(consumerSecret);
+        configurationBuilder.setOAuthAccessToken(accessToken);
+        configurationBuilder.setOAuthAccessTokenSecret(accessTokenSecret);
 
-		try {
-			final TwitterFactory tf = new TwitterFactory(
-					configurationBuilder.build());
-			final Twitter twitter = tf.getInstance();
-			executeTask(twitter);
-		} catch (final Exception e) {
-			throw new ConnectorException(e);
-		}
-		return Collections.emptyMap();
-	}
+        try {
+            final TwitterFactory tf = new TwitterFactory(
+                    configurationBuilder.build());
+            final Twitter twitter = tf.getInstance();
+            executeTask(twitter);
+        } catch (final Exception e) {
+            throw new ConnectorException(e);
+        }
+        return Collections.emptyMap();
+    }
 
-	protected abstract void executeTask(Twitter twitter) throws Exception;
+    protected abstract void executeTask(Twitter twitter) throws Exception;
 
-	@Override
-	public void connect() throws ConnectorException {
-	}
+    @Override
+    public void connect() throws ConnectorException {
+    }
 
-	@Override
-	public void disconnect() throws ConnectorException {
-	}
+    @Override
+    public void disconnect() throws ConnectorException {
+    }
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 20012 BonitaSoft S.A.
+ * Copyright (C) 2012-2014 BonitaSoft S.A.
  * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,23 +24,23 @@ import twitter4j.Twitter;
  */
 public class TwitterDirectMessageConnector extends TwitterConnector {
 
-	private String message;
+    private String message;
 
-	private String recipientId;
+    private String recipientId;
 
-	@Override
-	public void setInputParameters(final Map<String, Object> parameters) {
-		super.setInputParameters(parameters);
-		final Object messageObject = parameters.get("message");
-		message = messageObject != null ? (String) messageObject : "";
-		final Object recipientIdObject = parameters.get("recipientId");
-		recipientId = recipientIdObject != null ? (String) recipientIdObject
-				: "";
-	}
+    @Override
+    public void setInputParameters(final Map<String, Object> parameters) {
+        super.setInputParameters(parameters);
+        final Object messageObject = parameters.get("message");
+        message = messageObject != null ? (String) messageObject : "";
+        final Object recipientIdObject = parameters.get("recipientId");
+        recipientId = recipientIdObject != null ? (String) recipientIdObject
+                : "";
+    }
 
-	@Override
-	protected void executeTask(final Twitter twitter) throws Exception {
-		twitter.sendDirectMessage(recipientId, message);
-	}
+    @Override
+    protected void executeTask(final Twitter twitter) throws Exception {
+        twitter.sendDirectMessage(recipientId, message);
+    }
 
 }
