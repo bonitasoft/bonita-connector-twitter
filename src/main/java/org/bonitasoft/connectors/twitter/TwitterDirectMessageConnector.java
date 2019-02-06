@@ -15,32 +15,26 @@
 package org.bonitasoft.connectors.twitter;
 
 import java.util.Map;
+import java.util.Optional;
 
 import twitter4j.Twitter;
+import twitter4j.TwitterException;
 
-/**
- * @author Matthieu Chaffotte
- * @author Haris Subašić
- */
 public class TwitterDirectMessageConnector extends TwitterConnector {
 
-    private String message;
-
-    private String recipientId;
+    private Optional<String> message;
+    private Optional<String> recipientId;
 
     @Override
-    public void setInputParameters(final Map<String, Object> parameters) {
+    public void setInputParameters(Map<String, Object> parameters) {
         super.setInputParameters(parameters);
-        final Object messageObject = parameters.get("message");
-        message = messageObject != null ? (String) messageObject : "";
-        final Object recipientIdObject = parameters.get("recipientId");
-        recipientId = recipientIdObject != null ? (String) recipientIdObject
-                : "";
+        message = getStringParameter(parameters, "message");
+        recipientId = getStringParameter(parameters, "recipientId");
     }
 
     @Override
-    protected void executeTask(final Twitter twitter) throws Exception {
-        twitter.sendDirectMessage(recipientId, message);
+    protected void executeTask(Twitter twitter) throws TwitterException {
+        twitter.sendDirectMessage(recipientId.orElse(""), message.orElse(""));
     }
 
 }

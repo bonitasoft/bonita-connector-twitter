@@ -33,100 +33,89 @@ import org.junit.Test;
 
 public abstract class TwitterConnectorTest {
 
-	protected static final Logger LOG = Logger
-			.getLogger(TwitterConnectorTest.class.getName());
+    protected static final Logger LOG = Logger
+            .getLogger(TwitterConnectorTest.class.getName());
 
-	@Before
-	public void initialize() throws Exception {
-		if (TwitterConnectorTest.LOG.isLoggable(Level.WARNING)) {
-			TwitterConnectorTest.LOG.warning("======== Starting test: "
-					+ this.getClass().getName() + "() ==========");
-		}
-	}
+    @Before
+    public void initialize() throws Exception {
+        if (TwitterConnectorTest.LOG.isLoggable(Level.WARNING)) {
+            TwitterConnectorTest.LOG.warning("======== Starting test: " + this.getClass().getName() + "() ==========");
+        }
+    }
 
-	@After
-	public void addLogEnding() throws Exception {
-		if (TwitterConnectorTest.LOG.isLoggable(Level.WARNING)) {
-			TwitterConnectorTest.LOG.warning("======== Ending test: "
-					+ this.getClass().getName() + " ==========");
-		}
-	}
+    @After
+    public void addLogEnding() throws Exception {
+        if (TwitterConnectorTest.LOG.isLoggable(Level.WARNING)) {
+            TwitterConnectorTest.LOG.warning("======== Ending test: " + this.getClass().getName() + " ==========");
+        }
+    }
 
-	protected abstract Class<? extends Connector> getConnectorClass();
+    protected abstract Class<? extends Connector> getConnectorClass();
 
-	//
-	// @Test(expected = ConnectorValidationException.class)
-	// public void validateConnector() throws BonitaException {
-	// Connector.validate();
-	// Assert.assertTrue(Connector.validateConnector(getConnectorClass())
-	// .isEmpty())
-	// assertTrue();
-	// }
+    @Test(expected = ConnectorValidationException.class)
+    public void setWrappedSmtpPortWithLessThanRange() throws BonitaException {
+        final Map<String, Object> parameters = new HashMap<>();
+        parameters.put("proxyHost", "");
+        parameters.put("proxyPort", -1);
+        final TwitterConnector connector = getTwitterConnector(parameters);
+        connector.validateInputParameters();
+    }
 
-	@Test(expected = ConnectorValidationException.class)
-	public void setWrappedSmtpPortWithLessThanRange() throws BonitaException {
-		final Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("proxyHost", "");
-		parameters.put("proxyPort", -1);
-		final TwitterConnector connector = getTwitterConnector(parameters);
-		connector.validateInputParameters();
-	}
+    @Test(expected = ConnectorValidationException.class)
+    public void setWrappedSmtpPortWithGreaterThanRange() throws BonitaException {
+        final Map<String, Object> parameters = new HashMap<>();
+        parameters.put("proxyHost", "");
+        parameters.put("proxyPort", 65536);
+        final TwitterConnector connector = getTwitterConnector(parameters);
+        connector.validateInputParameters();
+    }
 
-	@Test(expected = ConnectorValidationException.class)
-	public void setWrappedSmtpPortWithGreaterThanRange() throws BonitaException {
-		final Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("proxyHost", "");
-		parameters.put("proxyPort", 65536);
-		final TwitterConnector connector = getTwitterConnector(parameters);
-		connector.validateInputParameters();
-	}
+    @Test(expected = ConnectorValidationException.class)
+    public void setSmtpPortWithLessThanRange() throws BonitaException {
+        final Map<String, Object> parameters = new HashMap<>();
+        parameters.put("proxyPort", -1);
+        parameters.put("proxyHost", "");
+        final TwitterConnector connector = getTwitterConnector(parameters);
+        connector.validateInputParameters();
+    }
 
-	@Test(expected = ConnectorValidationException.class)
-	public void setSmtpPortWithLessThanRange() throws BonitaException {
-		final Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("proxyPort", -1);
-		parameters.put("proxyHost", "");
-		final TwitterConnector connector = getTwitterConnector(parameters);
-		connector.validateInputParameters();
-	}
+    @Test(expected = ConnectorValidationException.class)
+    public void setSmtpPortWithGreaterThanRange() throws BonitaException {
+        final Map<String, Object> parameters = new HashMap<>();
+        parameters.put("proxyPort", 65536);
+        parameters.put("proxyHost", "");
+        final TwitterConnector connector = getTwitterConnector(parameters);
+        connector.validateInputParameters();
+    }
 
-	@Test(expected = ConnectorValidationException.class)
-	public void setSmtpPortWithGreaterThanRange() throws BonitaException {
-		final Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("proxyPort", 65536);
-		parameters.put("proxyHost", "");
-		final TwitterConnector connector = getTwitterConnector(parameters);
-		connector.validateInputParameters();
-	}
+    @Ignore
+    @Test
+    public void execute() {
+        final Map<String, Object> emptyMap = Collections.emptyMap();
+        final TwitterConnector connector = getTwitterConnector(emptyMap);
+        try {
+            connector.execute();
+        } catch (final Exception e) {
+            e.printStackTrace();
+            fail("Impossible! A Tweet must be sent");
+        }
+    }
 
-	@Ignore
-	@Test
-	public void execute() {
-		final Map<String, Object> emptyMap = Collections.emptyMap();
-		final TwitterConnector connector = getTwitterConnector(emptyMap);
-		try {
-			connector.execute();
-		} catch (final Exception e) {
-			e.printStackTrace();
-			fail("Impossible! A Tweet must be sent");
-		}
-	}
+    public Map<String, Object> getTwitterConnectorParameters() {
+        final Map<String, Object> parameters = new HashMap<>();
+        parameters.put("consumerKey", "zerzer");
+        parameters.put("consumerSecret", "mljpoi");
+        parameters.put("accesToken",
+                "7MyWkyU2RuQxeNGTqn8AItTWuAIb9juhN3mhgBmUKn8");
+        parameters.put("accessTokenSecret",
+                "zTf1uz5RZR9XmuAdPnMwk4PfnLRoI1o4gyNU7wSlQ");
+        parameters.put("status", "poafjaofj");
+        parameters.put("proxyHost", "myproxy.bonitasoft.com");
+        parameters.put("proxyPort", 8080);
 
-	public Map<String, Object> getTwitterConnectorParameters() {
-		final Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("consumerKey", "zerzer");
-		parameters.put("consumerSecret", "mljpoi");
-		parameters.put("accesToken",
-				"7MyWkyU2RuQxeNGTqn8AItTWuAIb9juhN3mhgBmUKn8");
-		parameters.put("accessTokenSecret",
-				"zTf1uz5RZR9XmuAdPnMwk4PfnLRoI1o4gyNU7wSlQ");
-		parameters.put("status", "poafjaofj");
-		parameters.put("proxyHost", "myproxy.bonitasoft.com");
-		parameters.put("proxyPort", 8080);
+        return parameters;
+    }
 
-		return parameters;
-	}
-
-	public abstract TwitterConnector getTwitterConnector(
-			Map<String, Object> parameters);
+    public abstract TwitterConnector getTwitterConnector(
+            Map<String, Object> parameters);
 }

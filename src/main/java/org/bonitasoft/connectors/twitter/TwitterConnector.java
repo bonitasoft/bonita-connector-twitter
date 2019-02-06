@@ -18,76 +18,55 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.bonitasoft.engine.connector.Connector;
 import org.bonitasoft.engine.connector.ConnectorException;
 import org.bonitasoft.engine.connector.ConnectorValidationException;
 
 import twitter4j.Twitter;
+import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
-/**
- * This connector provides a twitter sending service.
- * 
- * @author Matthieu Chaffotte
- * @author Yanyan Liu
- * @author Baptiste Mesta
- * @author Haris Subašić
- * @author Maxence Raoux
- */
-
 public abstract class TwitterConnector implements Connector {
 
-    private String proxyHost;
+    private Optional<String> proxyHost;
 
-    private Integer proxyPort;
+    private Optional<Integer> proxyPort;
 
-    private String proxyUser;
+    private Optional<String> proxyUser;
 
-    private String proxyPass;
+    private Optional<String> proxyPass;
 
-    private String consumerKey;
+    private Optional<String> consumerKey;
 
-    private String consumerSecret;
+    private Optional<String> consumerSecret;
 
-    private String accessToken;
+    private Optional<String> accessToken;
 
-    private String accessTokenSecret;
+    private Optional<String> accessTokenSecret;
 
     @Override
-    public void setInputParameters(final Map<String, Object> parameters) {
-        final Object proxyHostObject = parameters.get("proxyHost");
-        proxyHost = proxyHostObject != null ? (String) proxyHostObject : "";
-        final Object proxyPortObject = parameters.get("proxyPort");
-        proxyPort = proxyPortObject != null ? (Integer) proxyPortObject : 0;
-        final Object proxyUserObject = parameters.get("proxyUser");
-        proxyUser = proxyUserObject != null ? (String) proxyUserObject : "";
-        final Object proxyPassObject = parameters.get("proxyPass");
-        proxyPass = proxyPassObject != null ? (String) proxyPassObject : "";
-        final Object consumerKeyObject = parameters.get("consumerKey");
-        consumerKey = consumerKeyObject != null ? (String) consumerKeyObject
-                : "";
-        final Object consumerSecretObject = parameters.get("consumerSecret");
-        consumerSecret = consumerSecretObject != null ? (String) consumerSecretObject
-                : "";
-        final Object accessTokenObject = parameters.get("accessToken");
-        accessToken = accessTokenObject != null ? (String) accessTokenObject
-                : "";
-        final Object accessTokenSecretObject = parameters
-                .get("accessTokenSecret");
-        accessTokenSecret = accessTokenSecretObject != null ? (String) accessTokenSecretObject
-                : "";
+    public void setInputParameters(Map<String, Object> parameters) {
+        proxyHost = getStringParameter(parameters, "proxyHost");
+        proxyPort = getIntegerParameter(parameters, "proxyPort");
+        proxyUser = getStringParameter(parameters, "proxyUser");
+        proxyPass = getStringParameter(parameters, "proxyPass");
 
+        consumerKey = getStringParameter(parameters, "consumerKey");
+        consumerSecret = getStringParameter(parameters, "consumerSecret");
+        accessToken = getStringParameter(parameters, "accessToken");
+        accessTokenSecret = getStringParameter(parameters, "accessTokenSecret");
     }
 
     @Override
     public void validateInputParameters() throws ConnectorValidationException {
-        final List<String> errors = new ArrayList<String>(1);
+        List<String> errors = new ArrayList<>();
 
-        if (proxyPort < 0) {
+        if (proxyPort.orElse(0) < 0) {
             errors.add("proxyPort cannot be less than 0!");
-        } else if (proxyPort > 65535) {
+        } else if (proxyPort.orElse(0) > 65535) {
             errors.add("proxyPort cannot be greater than 65535!");
         }
 
@@ -98,33 +77,38 @@ public abstract class TwitterConnector implements Connector {
 
     @Override
     public Map<String, Object> execute() throws ConnectorException {
-
-        final ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
-        if (proxyHost != null && proxyPort != null) {
-            configurationBuilder.setHttpProxyHost(proxyHost);
-            configurationBuilder.setHttpProxyPort(proxyPort);
-            if (proxyUser != null && proxyPass != null) {
-                configurationBuilder.setHttpProxyUser(proxyUser);
-                configurationBuilder.setHttpProxyPassword(proxyPass);
-            }
-        }
-        configurationBuilder.setOAuthConsumerKey(consumerKey);
-        configurationBuilder.setOAuthConsumerSecret(consumerSecret);
-        configurationBuilder.setOAuthAccessToken(accessToken);
-        configurationBuilder.setOAuthAccessTokenSecret(accessTokenSecret);
-
+        ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+        setProxyConfiguration(configurationBuilder);
+        setOAuthCOnfiguration(configurationBuilder);
         try {
-            final TwitterFactory tf = new TwitterFactory(
-                    configurationBuilder.build());
-            final Twitter twitter = tf.getInstance();
+            TwitterFactory tf = new TwitterFactory(configurationBuilder.build());
+            Twitter twitter = tf.getInstance();
             executeTask(twitter);
-        } catch (final Exception e) {
+        } catch (TwitterException e) {
             throw new ConnectorException(e);
         }
         return Collections.emptyMap();
     }
 
-    protected abstract void executeTask(Twitter twitter) throws Exception;
+    private void setOAuthCOnfiguration(ConfigurationBuilder configurationBuilder) {
+        configurationBuilder.setOAuthConsumerKey(consumerKey.orElse(""));
+        configurationBuilder.setOAuthConsumerSecret(consumerSecret.orElse(""));
+        configurationBuilder.setOAuthAccessToken(accessToken.orElse(""));
+        configurationBuilder.setOAuthAccessTokenSecret(accessTokenSecret.orElse(""));
+    }
+
+    private void setProxyConfiguration(ConfigurationBuilder configurationBuilder) {
+        if (proxyHost.isPresent() && proxyPort.isPresent()) {
+            configurationBuilder.setHttpProxyHost(proxyHost.get());
+            configurationBuilder.setHttpProxyPort(proxyPort.get());
+            if (proxyUser.isPresent() && proxyPass.isPresent()) {
+                configurationBuilder.setHttpProxyUser(proxyUser.get());
+                configurationBuilder.setHttpProxyPassword(proxyPass.get());
+            }
+        }
+    }
+
+    protected abstract void executeTask(Twitter twitter) throws TwitterException;
 
     @Override
     public void connect() throws ConnectorException {
@@ -132,5 +116,17 @@ public abstract class TwitterConnector implements Connector {
 
     @Override
     public void disconnect() throws ConnectorException {
+    }
+
+    protected Optional<String> getStringParameter(Map<String, Object> parameters, String key) {
+        return getParameter(parameters, key).filter(String.class::isInstance).map(String.class::cast);
+    }
+
+    protected Optional<Integer> getIntegerParameter(Map<String, Object> parameters, String key) {
+        return getParameter(parameters, key).filter(Integer.class::isInstance).map(Integer.class::cast);
+    }
+
+    private Optional<Object> getParameter(Map<String, Object> parameters, String key) {
+        return Optional.ofNullable(parameters.get(key));
     }
 }
