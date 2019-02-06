@@ -15,26 +15,24 @@
 package org.bonitasoft.connectors.twitter;
 
 import java.util.Map;
+import java.util.Optional;
 
 import twitter4j.Twitter;
+import twitter4j.TwitterException;
 
-/**
- * @author Matthieu Chaffotte
- * @author Haris Subasic
- */
 public class TwitterUpdateStatusConnector extends TwitterConnector {
 
-    private String status;
+    private Optional<String> status;
 
     @Override
-    public void setInputParameters(final Map<String, Object> parameters) {
+    public void setInputParameters(Map<String, Object> parameters) {
         super.setInputParameters(parameters);
-        final Object statusObject = parameters.get("status");
-        status = statusObject != null ? (String) statusObject : "";
+        status = getStringParameter(parameters, "status");
     }
 
     @Override
-    protected void executeTask(final Twitter twitter) throws Exception {
-        twitter.updateStatus(status);
+    protected void executeTask(Twitter twitter) throws TwitterException {
+        twitter.updateStatus(status.orElse(""));
     }
+
 }
