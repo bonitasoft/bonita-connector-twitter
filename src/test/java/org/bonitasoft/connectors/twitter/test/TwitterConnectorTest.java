@@ -14,9 +14,6 @@
  */
 package org.bonitasoft.connectors.twitter.test;
 
-import static org.junit.Assert.fail;
-
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -28,7 +25,6 @@ import org.bonitasoft.engine.connector.ConnectorValidationException;
 import org.bonitasoft.engine.exception.BonitaException;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public abstract class TwitterConnectorTest {
@@ -86,19 +82,6 @@ public abstract class TwitterConnectorTest {
         parameters.put("proxyHost", "");
         final TwitterConnector connector = getTwitterConnector(parameters);
         connector.validateInputParameters();
-    }
-
-    @Ignore
-    @Test
-    public void execute() {
-        final Map<String, Object> emptyMap = Collections.emptyMap();
-        final TwitterConnector connector = getTwitterConnector(emptyMap);
-        try {
-            connector.execute();
-        } catch (final Exception e) {
-            e.printStackTrace();
-            fail("Impossible! A Tweet must be sent");
-        }
     }
 
     public Map<String, Object> getTwitterConnectorParameters() {
