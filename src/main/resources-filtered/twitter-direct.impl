@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<implementation:connectorImplementation xmlns:implementation="http://www.bonitasoft.org/ns/connector/implementation/6.0">
+
+	<definitionId>${twitter-direct.def.id}</definitionId>
+	<definitionVersion>${twitter-direct.def.version}</definitionVersion>
+	<implementationId>${twitter-direct.impl.id}</implementationId>
+    <implementationVersion>${twitter-direct.impl.version}</implementationVersion>
+	<description>Implementation based on twitter4j-core 4.0.7</description>
+	<hasSources>false</hasSources>
+	<implementationClassname>${twitter-direct.main-class}</implementationClassname>
+
+    <!-- retrieved from the pom.xml at build time -->
+    ${connector-dependencies}
+
+</implementation:connectorImplementation>
