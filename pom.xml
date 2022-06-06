@@ -54,7 +54,7 @@
 		<twitter4j.version>4.0.7</twitter4j.version>
 
 		<!-- Bonita -->
-		<bonita.engine.version>7.13.0</bonita.engine.version>
+		<bonita.engine.version>7.14.0</bonita.engine.version>
 
 		<!-- Test -->
 		<jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
