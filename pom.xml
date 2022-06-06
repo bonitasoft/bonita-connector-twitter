@@ -58,7 +58,7 @@
 
 		<!-- Test -->
 		<jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
-		<sonar-maven-plugin.version>3.7.0.1746</sonar-maven-plugin.version>
+		<sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
 
 		<!-- Maven plugins -->
 		<maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
