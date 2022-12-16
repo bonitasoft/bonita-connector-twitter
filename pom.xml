@@ -57,6 +57,7 @@
         <!-- Test -->
         <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
         <sonar-maven-plugin.version>3.7.0.1746</sonar-maven-plugin.version>
+        <junit.version>4.13.2</junit.version>
         
         <!-- Maven plugins -->
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
@@ -114,6 +115,7 @@
         <dependency>
             <artifactId>junit</artifactId>
             <groupId>junit</groupId>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
 	</dependencies>
