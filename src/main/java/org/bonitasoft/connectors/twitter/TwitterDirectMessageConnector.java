@@ -34,7 +34,7 @@ public class TwitterDirectMessageConnector extends TwitterConnector {
 
     @Override
     protected void executeTask(Twitter twitter) throws TwitterException {
-        twitter.sendDirectMessage(recipientId.orElse(""), message.orElse(""));
+        twitter.v1().directMessages().sendDirectMessage(recipientId.orElse(""), message.orElse(""));
     }
 
 }

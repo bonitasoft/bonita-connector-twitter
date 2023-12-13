@@ -51,7 +51,7 @@
 
 		<!-- Connector dependencies -->
 		<javax.activation.version>1.1.1</javax.activation.version>
-		<twitter4j.version>4.0.7</twitter4j.version>
+		<twitter4j.version>4.1.2</twitter4j.version>
 
 		<!-- Bonita -->
 		<bonita.engine.version>7.13.0</bonita.engine.version>

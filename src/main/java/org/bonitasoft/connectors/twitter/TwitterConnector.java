@@ -26,8 +26,6 @@ import org.bonitasoft.engine.connector.ConnectorValidationException;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
-import twitter4j.conf.ConfigurationBuilder;
 
 public abstract class TwitterConnector implements Connector {
 
@@ -77,33 +75,29 @@ public abstract class TwitterConnector implements Connector {
 
     @Override
     public Map<String, Object> execute() throws ConnectorException {
-        ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
-        setProxyConfiguration(configurationBuilder);
-        setOAuthCOnfiguration(configurationBuilder);
         try {
-            TwitterFactory tf = new TwitterFactory(configurationBuilder.build());
-            Twitter twitter = tf.getInstance();
-            executeTask(twitter);
+            Twitter.TwitterBuilder twitterBuilder = Twitter.newBuilder();
+            setProxyConfiguration(twitterBuilder);
+            setOAuthConfiguration(twitterBuilder);
+            executeTask(twitterBuilder.build());
         } catch (TwitterException e) {
             throw new ConnectorException(e);
         }
         return Collections.emptyMap();
     }
 
-    private void setOAuthCOnfiguration(ConfigurationBuilder configurationBuilder) {
-        configurationBuilder.setOAuthConsumerKey(consumerKey.orElse(""));
-        configurationBuilder.setOAuthConsumerSecret(consumerSecret.orElse(""));
-        configurationBuilder.setOAuthAccessToken(accessToken.orElse(""));
-        configurationBuilder.setOAuthAccessTokenSecret(accessTokenSecret.orElse(""));
+    private void setOAuthConfiguration(Twitter.TwitterBuilder twitterBuilder) {
+        twitterBuilder.oAuthConsumer(consumerKey.orElse(""), consumerSecret.orElse(""));
+        twitterBuilder.oAuthAccessToken(accessToken.orElse(""), accessTokenSecret.orElse(""));
     }
 
-    private void setProxyConfiguration(ConfigurationBuilder configurationBuilder) {
+    private void setProxyConfiguration(Twitter.TwitterBuilder twitterBuilder) {
         if (proxyHost.isPresent() && proxyPort.isPresent()) {
-            configurationBuilder.setHttpProxyHost(proxyHost.get());
-            configurationBuilder.setHttpProxyPort(proxyPort.get());
+            twitterBuilder.httpProxyHost(proxyHost.get());
+            twitterBuilder.httpProxyPort(proxyPort.get());
             if (proxyUser.isPresent() && proxyPass.isPresent()) {
-                configurationBuilder.setHttpProxyUser(proxyUser.get());
-                configurationBuilder.setHttpProxyPassword(proxyPass.get());
+                twitterBuilder.httpProxyUser(proxyUser.get());
+                twitterBuilder.httpProxyPassword(proxyPass.get());
             }
         }
     }

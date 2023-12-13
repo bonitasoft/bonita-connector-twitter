@@ -32,7 +32,7 @@ public class TwitterUpdateStatusConnector extends TwitterConnector {
 
     @Override
     protected void executeTask(Twitter twitter) throws TwitterException {
-        twitter.updateStatus(status.orElse(""));
+        twitter.v1().tweets().updateStatus(status.orElse(""));
     }
 
 }
