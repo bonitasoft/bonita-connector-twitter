@@ -1,3 +1,8 @@
+# DEPRECATED
+With the API changes and the move from Twitter to X, this connector is no longer expected to work.
+
+It is now deprecated and will not get updated. No replacement is planned.
+
 # Twitter Connector
 
 [![Actions Status](https://github.com/bonitasoft/bonita-connector-twitter/workflows/Build/badge.svg)](https://github.com/bonitasoft/bonita-connector-twitter/actions?query=workflow%3ABuild)
